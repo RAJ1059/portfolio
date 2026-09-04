@@ -36,13 +36,25 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] flex items-center justify-center pt-32 pb-20 lg:pt-36 lg:pb-28 overflow-hidden bg-[#080c14] bg-grid-pattern"
+      className="relative min-h-[92vh] flex items-center justify-center pt-32 pb-20 lg:pt-36 lg:pb-28 overflow-hidden bg-[#080c14]"
     >
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] hero-glow-1 rounded-full pointer-events-none blur-3xl opacity-60" />
-      <div className="absolute top-1/3 right-10 w-[420px] h-[420px] hero-glow-2 rounded-full pointer-events-none blur-3xl opacity-50" />
+      {/* Developer Coding Background Image - Clear & Vividly Visible */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <img
+          src="/code-bg.png"
+          alt="Developer Code Screen Background"
+          className="w-full h-full object-cover object-center sm:object-right opacity-65 sm:opacity-75 select-none"
+        />
+        {/* Vignette Overlay for High Contrast & Text Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080c14]/60 via-[#080c14]/35 to-[#080c14]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080c14]/85 via-[#080c14]/40 to-transparent" />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] hero-glow-1 rounded-full pointer-events-none blur-3xl opacity-50" />
+      <div className="absolute top-1/3 right-10 w-[420px] h-[420px] hero-glow-2 rounded-full pointer-events-none blur-3xl opacity-40" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Sanjay Menon Editorial Style Headline & Positioning */}
           <motion.div
