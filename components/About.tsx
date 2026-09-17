@@ -36,14 +36,34 @@ export default function About() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:col-span-7 space-y-6"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#101726] border border-white/10 text-[#38bdf8] text-xs font-mono uppercase tracking-wider mb-2 shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0281e0]" />
-              <span>ABOUT ME</span>
-            </div>
+            {/* Header with Profile Picture */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 pb-2">
+              <div className="relative group shrink-0">
+                <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#0281e0] via-[#38bdf8]/40 to-transparent rounded-2xl blur-md opacity-40 group-hover:opacity-75 transition duration-500" />
+                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border border-white/15 bg-[#101726] shadow-xl shadow-black/50">
+                  <img
+                    src="/shivraj-profile.jpg"
+                    alt="Shivraj Singh - Full-Stack & WordPress Developer"
+                    className="w-full h-full object-cover object-center contrast-110 group-hover:scale-105 transition-all duration-500"
+                  />
+                </div>
+                <div className="absolute -bottom-2 -right-1.5 bg-[#101726]/90 backdrop-blur-sm border border-[#0281e0]/40 rounded-full px-2.5 py-0.5 text-[10px] font-mono text-[#38bdf8] flex items-center gap-1.5 shadow-lg">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#0281e0] animate-pulse" />
+                  <span>Shivraj</span>
+                </div>
+              </div>
 
-            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white editorial-title">
-              A little about myself.
-            </h2>
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#101726] border border-white/10 text-[#38bdf8] text-xs font-mono uppercase tracking-wider shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#0281e0]" />
+                  <span>ABOUT ME</span>
+                </div>
+
+                <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white editorial-title">
+                  A little about myself.
+                </h2>
+              </div>
+            </div>
 
             <div className="space-y-5 text-base sm:text-lg text-[#cbd5e1] leading-relaxed">
               <p>
