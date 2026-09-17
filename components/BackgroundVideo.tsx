@@ -46,7 +46,6 @@ export default function BackgroundVideo() {
           } mix-blend-luminosity filter contrast-125 brightness-75 saturate-110`}
       >
         <source src="/videos/himalayas-bg-fast.webm" type="video/webm" />
-        <source src="/videos/himalayas-bg.webm" type="video/webm" />
       </video>
 
       {/* Cinematic Color Wash — Deep Slate Obsidian with Subtle Crimson Atmosphere */}
