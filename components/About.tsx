@@ -83,7 +83,7 @@ export default function About() {
                 Shivraj.
               </p>
               <span className="text-xs font-mono text-[#94a3b8]">
-                // Full-Stack &amp; WordPress Engineer
+                {"// Full-Stack & WordPress Engineer"}
               </span>
             </div>
           </motion.div>
@@ -108,7 +108,7 @@ export default function About() {
               </div>
 
               <div className="space-y-3.5">
-                {coreCapabilities.map((cap, i) => (
+                {coreCapabilities.map((cap) => (
                   <motion.div
                     key={cap.title}
                     whileHover={{ x: 4 }}

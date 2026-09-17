@@ -11,10 +11,13 @@ export default function BackgroundVideo() {
     // Respect prefers-reduced-motion
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mediaQuery.matches) {
-      setIsPlaying(false);
-      if (videoRef.current) {
-        videoRef.current.pause();
-      }
+      const timer = setTimeout(() => {
+        setIsPlaying(false);
+        if (videoRef.current) {
+          videoRef.current.pause();
+        }
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, []);
 

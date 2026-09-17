@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, Sparkles, MessageSquare } from "lucide-react";
+import { X, Send } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/SocialIcons";
 
 const quickPrompts = [

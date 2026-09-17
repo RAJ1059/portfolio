@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { workflowSteps } from "@/data/workflow";
 import {
   CheckCircle2,
@@ -12,7 +12,6 @@ import {
   Rocket,
   Sparkles,
   ArrowRight,
-  ArrowDown,
   Zap,
   Play,
   Pause,
@@ -166,7 +165,6 @@ export default function Workflow() {
               const Icon = stepIcons[index] || Zap;
               const isActive = index === activeStep;
               const meta = phaseFlowMeta[index];
-              const isLastInRow1 = index === 2;
               const isLastStep = index === 5;
 
               return (

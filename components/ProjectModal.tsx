@@ -52,7 +52,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#0281e0]" />
               <span className="text-xs font-mono text-[#a3a3a3] uppercase tracking-wider">
-                {project.category} // Architecture Breakdown
+                {project.category} {"// Architecture Breakdown"}
               </span>
             </div>
             <button

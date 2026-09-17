@@ -146,13 +146,12 @@ export default function LiveCodeTerminal() {
   }, []);
 
   const [charIndex, setCharIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(true);
+  const isTyping = charIndex < totalCharacters;
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const resetAndType = () => {
     if (timerRef.current) clearTimeout(timerRef.current);
     setCharIndex(0);
-    setIsTyping(true);
   };
 
   useEffect(() => {
@@ -165,7 +164,6 @@ export default function LiveCodeTerminal() {
         setCharIndex((prev) => prev + 1);
       }, delay);
     } else {
-      setIsTyping(false);
       timerRef.current = setTimeout(() => {
         resetAndType();
       }, 8000);

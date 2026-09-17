@@ -13,7 +13,6 @@ import {
   Database,
   Globe,
 } from "lucide-react";
-import { personalInfo } from "@/data/personal";
 import LiveCodeTerminal from "@/components/LiveCodeTerminal";
 
 const techBadges = [
