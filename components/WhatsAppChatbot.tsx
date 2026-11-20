@@ -51,7 +51,7 @@ export default function WhatsAppChatbot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 20 }}
             transition={{ type: "spring", stiffness: 350, damping: 25 }}
-            className="mb-4 w-[320px] sm:w-[360px] rounded-3xl overflow-hidden bg-[#0c1322] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col z-50"
+            className="mb-4 w-[320px] sm:w-[360px] rounded-3xl overflow-hidden bg-[#101018] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col z-50"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-[#128C7E] to-[#25D366] p-4 text-white flex items-center justify-between shadow-md">
@@ -84,7 +84,7 @@ export default function WhatsAppChatbot() {
             </div>
 
             {/* Chat Body */}
-            <div className="p-4 space-y-4 max-h-[380px] overflow-y-auto bg-[#080d18]/95">
+            <div className="p-4 space-y-4 max-h-[380px] overflow-y-auto bg-[#0a0a0f]/95">
               {/* Timestamp */}
               <div className="text-center">
                 <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-[#94a3b8]">
@@ -95,7 +95,7 @@ export default function WhatsAppChatbot() {
               {/* Bot Greeting Bubble */}
               <div className="flex flex-col items-start space-y-1">
                 <div className="bg-[#131e33] border border-white/10 rounded-2xl rounded-tl-sm p-3 text-xs text-[#e2e8f0] leading-relaxed shadow-sm">
-                  <p className="font-semibold text-[#38bdf8] mb-1">👋 Hi there!</p>
+                  <p className="font-semibold text-[#a78bfa] mb-1">👋 Hi there!</p>
                   <p>
                     I&apos;m Shivraj Singh. Looking to build a full-stack MERN app, WordPress corporate portal, or discuss a project? Let&apos;s connect directly on WhatsApp!
                   </p>
@@ -114,7 +114,7 @@ export default function WhatsAppChatbot() {
                   <button
                     key={i}
                     onClick={() => handleSend(prompt.message)}
-                    className="w-full text-left p-2.5 rounded-xl bg-[#101726] hover:bg-[#1a263c] border border-white/10 hover:border-[#25D366]/50 text-xs text-[#cbd5e1] hover:text-white transition-all flex items-center justify-between group cursor-pointer"
+                    className="w-full text-left p-2.5 rounded-xl bg-[#14141c] hover:bg-[#222233] border border-white/10 hover:border-[#25D366]/50 text-xs text-[#cbd5e1] hover:text-white transition-all flex items-center justify-between group cursor-pointer"
                   >
                     <span>{prompt.label}</span>
                     <Send className="w-3 h-3 text-[#25D366] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
@@ -124,7 +124,7 @@ export default function WhatsAppChatbot() {
             </div>
 
             {/* Input & Direct Send Bar */}
-            <div className="p-3 border-t border-white/10 bg-[#0c1322] flex items-center gap-2">
+            <div className="p-3 border-t border-white/10 bg-[#101018] flex items-center gap-2">
               <input
                 type="text"
                 value={message}
@@ -133,7 +133,7 @@ export default function WhatsAppChatbot() {
                   if (e.key === "Enter") handleSend();
                 }}
                 placeholder="Type your message..."
-                className="flex-1 bg-[#070b14] border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-[#64748b] focus:outline-none focus:border-[#25D366]"
+                className="flex-1 bg-[#0a0a0f] border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-[#64748b] focus:outline-none focus:border-[#25D366]"
               />
               <button
                 onClick={() => handleSend()}
@@ -145,7 +145,7 @@ export default function WhatsAppChatbot() {
             </div>
 
             {/* One-Click Direct CTA */}
-            <div className="px-3 pb-3 bg-[#0c1322]">
+            <div className="px-3 pb-3 bg-[#101018]">
               <button
                 onClick={() => handleSend()}
                 className="w-full py-2.5 px-3 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/40 text-[#25D366] font-semibold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer"
@@ -176,13 +176,13 @@ export default function WhatsAppChatbot() {
 
         {/* Unread Message Pill Badge */}
         {!isOpen && (
-          <span className="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center border-2 border-[#080c14] shadow-md z-20">
+          <span className="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center border-2 border-[#0a0a0f] shadow-md z-20">
             1
           </span>
         )}
 
         {/* Hover Label Tooltip */}
-        <span className="hidden group-hover:flex absolute right-18 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-xl bg-[#0c1322] border border-white/10 text-white text-xs font-semibold whitespace-nowrap shadow-xl shadow-black/80 items-center gap-1.5 pointer-events-none">
+        <span className="hidden group-hover:flex absolute right-18 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-xl bg-[#101018] border border-white/10 text-white text-xs font-semibold whitespace-nowrap shadow-xl shadow-black/80 items-center gap-1.5 pointer-events-none">
           <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
           <span>Chat on WhatsApp (9516981528)</span>
         </span>

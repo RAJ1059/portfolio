@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #080c14;
-  --surface: #0e1422;
-  --surface-card: #121929;
-  --surface-card-hover: #182238;
+  --background: #0a0a0f;
+  --surface: #12121a;
+  --surface-card: #16161f;
+  --surface-card-hover: #1e1e2a;
   --border: rgba(255, 255, 255, 0.1);
-  --border-subtle: #1e293b;
-  --border-active: #0281e0;
+  --border-subtle: #2a2a3d;
+  --border-active: #7c5cff;
   --foreground: #ffffff;
   --foreground-muted: #cbd5e1;
   --foreground-dim: #94a3b8;
-  --accent: #0281e0;
-  --accent-light: #38bdf8;
-  --accent-glow: rgba(2, 129, 224, 0.35);
+  --accent: #7c5cff;
+  --accent-light: #a78bfa;
+  --accent-glow: rgba(124, 92, 255, 0.35);
 }
 
 @theme {
-  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: var(--font-poppins), "Poppins", system-ui, sans-serif;
+  --font-mono: var(--font-poppins), "Poppins", system-ui, sans-serif;
 }
 
 body {
@@ -26,8 +26,35 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  selection-background-color: rgba(2, 129, 224, 0.4);
-  selection-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(124, 92, 255, 0.4);
+  color: #ffffff;
+}
+
+/* Keep section headings clear of the fixed navbar when jumping to anchors */
+section[id] {
+  scroll-margin-top: 72px;
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+button,
+[role="button"],
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
 }
 
 /* Custom Scrollbar */
@@ -36,21 +63,21 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #080c14;
+  background: #0a0a0f;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #2a2a3d;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0281e0;
+  background: #7c5cff;
 }
 
 /* Clearly Visible Glassmorphism Panel with High Contrast */
 .glass-panel {
-  background: #101726;
+  background: #14141c;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -62,21 +89,21 @@ body {
 }
 
 .glass-panel-hover:hover {
-  border-color: rgba(2, 129, 224, 0.55);
-  background: #151e33;
+  border-color: rgba(124, 92, 255, 0.55);
+  background: #1b1b27;
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px -2px rgba(2, 129, 224, 0.3);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px -2px rgba(124, 92, 255, 0.3);
 }
 
 /* Crisp Sub-Cards & Pills */
 .inner-card {
-  background: #0a0f1c;
+  background: #0e0e15;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .inner-card:hover {
-  border-color: rgba(2, 129, 224, 0.35);
-  background: #0d1424;
+  border-color: rgba(124, 92, 255, 0.35);
+  background: #12121b;
 }
 
 /* Visible Grid & Ambient Lighting */
@@ -86,23 +113,25 @@ body {
 }
 
 .hero-glow-1 {
-  background: radial-gradient(circle at 50% 50%, rgba(2, 129, 224, 0.22) 0%, transparent 65%);
+  background: radial-gradient(circle at 50% 50%, rgba(124, 92, 255, 0.22) 0%, transparent 65%);
 }
 
 .hero-glow-2 {
-  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15) 0%, transparent 65%);
+  background: radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.15) 0%, transparent 65%);
 }
 
 .code-block {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  background: #0a0f1c;
+  font-family: var(--font-poppins), "Poppins", system-ui, sans-serif;
+  background: #0e0e15;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Big Display Editorial Heading */
 .editorial-title {
-  letter-spacing: -0.04em;
-  line-height: 0.92;
+  /* Poppins has tall ascenders/descenders; looser leading avoids clipped gradient text */
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  padding-bottom: 0.08em;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -112,4 +141,80 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ===== Circular Carousel ===== */
+.circular-carousel {
+  --cc-fade: #000000;
+  --cc-radius: 12px;
+  --cc-inner: 0.4;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: none;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.circular-carousel[data-draggable] { cursor: grab; }
+.circular-carousel[data-dragging] { cursor: grabbing; }
+.circular-carousel:focus-visible { box-shadow: inset 0 0 0 2px rgba(128, 128, 140, 0.55); }
+.circular-carousel__view { position: absolute; inset: 0; }
+.circular-carousel__stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.circular-carousel[data-ready] .circular-carousel__stage { opacity: 1; }
+.circular-carousel__camera,
+.circular-carousel__ring,
+.circular-carousel__card {
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+.circular-carousel__camera { position: relative; }
+.circular-carousel__ring,
+.circular-carousel__card { position: absolute; left: 0; top: 0; }
+.circular-carousel__tile {
+  position: absolute;
+  outline: 1px solid transparent;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  cursor: pointer;
+}
+.circular-carousel__frame {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--cc-radius);
+}
+.circular-carousel__photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.circular-carousel__shade,
+.circular-carousel__inner { position: absolute; inset: 0; pointer-events: none; }
+.circular-carousel__shade { background: var(--cc-fade); opacity: var(--cc-depth, 0); }
+.circular-carousel__inner { background: #000000; opacity: var(--cc-inner); transition: opacity .4s ease; }
+.circular-carousel__tile[data-front] .circular-carousel__inner { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .circular-carousel__stage { transition: none; }
 }

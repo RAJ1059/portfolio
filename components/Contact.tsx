@@ -65,7 +65,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-28 relative bg-[#080c14] border-t border-white/10">
+    <section id="contact" className="py-28 relative bg-[#0a0a0f] border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - Sanjay Menon Iconic Stacked Punchline */}
         <motion.div
@@ -75,8 +75,8 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#101726] border border-white/10 text-[#38bdf8] text-xs font-mono uppercase tracking-wider mb-6 shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#0281e0]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#14141c] border border-white/10 text-[#a78bfa] text-xs font-mono uppercase tracking-wider mb-6 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#7c5cff]" />
             <span>START A CONVERSATION</span>
           </div>
 
@@ -90,7 +90,7 @@ export default function Contact() {
             <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#cbd5e1] tracking-tight editorial-title lowercase">
               build.
             </h2>
-            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#38bdf8] tracking-tight editorial-title lowercase">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-[#a78bfa] tracking-tight editorial-title lowercase">
               launch.
             </h2>
             <h3 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight pt-2">
@@ -101,7 +101,7 @@ export default function Contact() {
           <div className="flex flex-wrap items-center gap-4 mt-8">
             <a
               href={`mailto:${personalInfo.email}`}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-[#0281e0] hover:bg-[#0275cc] text-white font-bold text-xs shadow-lg shadow-[#0281e0]/30 transition-all hover:scale-[1.02] cursor-pointer"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-[#7c5cff] hover:bg-[#6a4be8] text-white font-bold text-xs shadow-lg shadow-[#7c5cff]/30 transition-all hover:scale-[1.02] cursor-pointer"
             >
               <Mail className="w-4 h-4" />
               <span>Send An Email</span>
@@ -109,9 +109,9 @@ export default function Contact() {
             <a
               href="/Shivraj_Singh_Resume.pdf"
               download
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-[#101726] hover:bg-[#151e33] text-white font-semibold text-xs border border-white/10 hover:border-[#0281e0]/50 transition-all shadow-md"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-[#14141c] hover:bg-[#1b1b27] text-white font-semibold text-xs border border-white/10 hover:border-[#7c5cff]/50 transition-all shadow-md"
             >
-              <FileText className="w-4 h-4 text-[#38bdf8]" />
+              <FileText className="w-4 h-4 text-[#a78bfa]" />
               <span>Download Resume</span>
             </a>
           </div>
@@ -128,20 +128,20 @@ export default function Contact() {
             className="lg:col-span-5 space-y-5"
           >
             {/* Email Card */}
-            <div className="bg-[#101726] hover:bg-[#141d30] p-7 rounded-3xl border border-white/10 shadow-xl shadow-black/50 transition-all duration-300">
+            <div className="bg-[#14141c] hover:bg-[#1b1b27] p-7 rounded-3xl border border-white/10 shadow-xl shadow-black/50 transition-all duration-300">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#94a3b8] font-semibold">
                   Direct Email
                 </span>
                 <button
                   onClick={handleCopyEmail}
-                  className="flex items-center gap-1 text-xs font-mono text-[#38bdf8] hover:text-white transition-colors p-1"
+                  className="flex items-center gap-1 text-xs font-mono text-[#a78bfa] hover:text-white transition-colors p-1"
                   aria-label="Copy email address"
                 >
                   {copiedEmail ? (
                     <>
-                      <Check className="w-4 h-4 text-[#0281e0]" />
-                      <span className="text-[#38bdf8] font-bold">Copied</span>
+                      <Check className="w-4 h-4 text-[#7c5cff]" />
+                      <span className="text-[#a78bfa] font-bold">Copied</span>
                     </>
                   ) : (
                     <>
@@ -153,7 +153,7 @@ export default function Contact() {
               </div>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="text-base sm:text-lg font-bold text-white hover:text-[#38bdf8] transition-colors break-all"
+                className="text-base sm:text-lg font-bold text-white hover:text-[#a78bfa] transition-colors break-all"
               >
                 {personalInfo.email}
               </a>
@@ -163,13 +163,13 @@ export default function Contact() {
             </div>
 
             {/* Phone Card */}
-            <div className="bg-[#101726] hover:bg-[#141d30] p-7 rounded-3xl border border-white/10 shadow-xl shadow-black/50 transition-all duration-300">
+            <div className="bg-[#14141c] hover:bg-[#1b1b27] p-7 rounded-3xl border border-white/10 shadow-xl shadow-black/50 transition-all duration-300">
               <span className="text-xs font-mono uppercase tracking-wider text-[#94a3b8] block mb-2 font-semibold">
                 Direct Line &amp; WhatsApp
               </span>
               <a
                 href={`tel:${personalInfo.phone}`}
-                className="text-base sm:text-lg font-bold text-white hover:text-[#38bdf8] transition-colors"
+                className="text-base sm:text-lg font-bold text-white hover:text-[#a78bfa] transition-colors"
               >
                 {personalInfo.phoneDisplay}
               </a>
@@ -179,12 +179,12 @@ export default function Contact() {
             </div>
 
             {/* Location Card */}
-            <div className="bg-[#101726] hover:bg-[#141d30] p-7 rounded-3xl border border-white/10 shadow-xl shadow-black/50 transition-all duration-300">
+            <div className="bg-[#14141c] hover:bg-[#1b1b27] p-7 rounded-3xl border border-white/10 shadow-xl shadow-black/50 transition-all duration-300">
               <span className="text-xs font-mono uppercase tracking-wider text-[#94a3b8] block mb-2 font-semibold">
                 Base Location
               </span>
               <div className="flex items-center gap-2 text-base font-bold text-white">
-                <MapPin className="w-5 h-5 text-[#0281e0]" />
+                <MapPin className="w-5 h-5 text-[#7c5cff]" />
                 <span>{personalInfo.location}</span>
               </div>
               <p className="text-xs text-[#cbd5e1] mt-2">
@@ -201,9 +201,9 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-7"
           >
-            <div className="bg-[#101726] rounded-3xl p-7 sm:p-10 border border-white/10 shadow-2xl shadow-black/60">
+            <div className="bg-[#14141c] rounded-3xl p-7 sm:p-10 border border-white/10 shadow-2xl shadow-black/60">
               <div className="flex items-center gap-2.5 mb-8">
-                <div className="p-2.5 rounded-xl bg-[#090e1a] border border-white/10 text-[#0281e0]">
+                <div className="p-2.5 rounded-xl bg-[#0d0d14] border border-white/10 text-[#7c5cff]">
                   <MessageSquare className="w-5 h-5" />
                 </div>
                 <div>
@@ -217,8 +217,8 @@ export default function Contact() {
               </div>
 
               {status === "success" ? (
-                <div className="p-8 rounded-2xl bg-[#0281e0]/10 border border-[#0281e0]/30 text-center space-y-3">
-                  <CheckCircle2 className="w-12 h-12 text-[#38bdf8] mx-auto" />
+                <div className="p-8 rounded-2xl bg-[#7c5cff]/10 border border-[#7c5cff]/30 text-center space-y-3">
+                  <CheckCircle2 className="w-12 h-12 text-[#a78bfa] mx-auto" />
                   <h4 className="text-lg font-bold text-white">
                     Message Dispatched
                   </h4>
@@ -251,10 +251,10 @@ export default function Contact() {
                           setFormData({ ...formData, name: e.target.value })
                         }
                         placeholder="e.g. Alex Morgan"
-                        className={`w-full px-4 py-3 rounded-2xl bg-[#090e1a] border text-sm text-white placeholder-[#64748b] focus:outline-none focus:ring-2 transition-all ${
+                        className={`w-full px-4 py-3 rounded-2xl bg-[#0d0d14] border text-sm text-white placeholder-[#64748b] focus:outline-none focus:ring-2 transition-all ${
                           errors.name
                             ? "border-red-500 focus:ring-red-500"
-                            : "border-white/10 focus:border-[#0281e0] focus:ring-[#0281e0]/30"
+                            : "border-white/10 focus:border-[#7c5cff] focus:ring-[#7c5cff]/30"
                         }`}
                       />
                       {errors.name && (
@@ -280,10 +280,10 @@ export default function Contact() {
                           setFormData({ ...formData, email: e.target.value })
                         }
                         placeholder="alex@company.com"
-                        className={`w-full px-4 py-3 rounded-2xl bg-[#090e1a] border text-sm text-white placeholder-[#64748b] focus:outline-none focus:ring-2 transition-all ${
+                        className={`w-full px-4 py-3 rounded-2xl bg-[#0d0d14] border text-sm text-white placeholder-[#64748b] focus:outline-none focus:ring-2 transition-all ${
                           errors.email
                             ? "border-red-500 focus:ring-red-500"
-                            : "border-white/10 focus:border-[#0281e0] focus:ring-[#0281e0]/30"
+                            : "border-white/10 focus:border-[#7c5cff] focus:ring-[#7c5cff]/30"
                         }`}
                       />
                       {errors.email && (
@@ -310,10 +310,10 @@ export default function Contact() {
                         setFormData({ ...formData, subject: e.target.value })
                       }
                       placeholder="e.g. WordPress Redesign or Full-Stack Web App"
-                      className={`w-full px-4 py-3 rounded-2xl bg-[#090e1a] border text-sm text-white placeholder-[#64748b] focus:outline-none focus:ring-2 transition-all ${
+                      className={`w-full px-4 py-3 rounded-2xl bg-[#0d0d14] border text-sm text-white placeholder-[#64748b] focus:outline-none focus:ring-2 transition-all ${
                         errors.subject
                           ? "border-red-500 focus:ring-red-500"
-                          : "border-white/10 focus:border-[#0281e0] focus:ring-[#0281e0]/30"
+                          : "border-white/10 focus:border-[#7c5cff] focus:ring-[#7c5cff]/30"
                       }`}
                     />
                     {errors.subject && (
@@ -339,10 +339,10 @@ export default function Contact() {
                         setFormData({ ...formData, message: e.target.value })
                       }
                       placeholder="Share an overview of your requirements, timeline, or goals..."
-                      className={`w-full px-4 py-3 rounded-2xl bg-[#090e1a] border text-sm text-white placeholder-[#64748b] focus:outline-none focus:ring-2 transition-all resize-none ${
+                      className={`w-full px-4 py-3 rounded-2xl bg-[#0d0d14] border text-sm text-white placeholder-[#64748b] focus:outline-none focus:ring-2 transition-all resize-none ${
                         errors.message
                           ? "border-red-500 focus:ring-red-500"
-                          : "border-white/10 focus:border-[#0281e0] focus:ring-[#0281e0]/30"
+                          : "border-white/10 focus:border-[#7c5cff] focus:ring-[#7c5cff]/30"
                       }`}
                     />
                     {errors.message && (
@@ -355,7 +355,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-[#0281e0] hover:bg-[#0275cc] text-white font-bold text-xs shadow-lg shadow-[#0281e0]/30 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-[#7c5cff] hover:bg-[#6a4be8] text-white font-bold text-xs shadow-lg shadow-[#7c5cff]/30 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50"
                   >
                     {status === "submitting" ? (
                       <>

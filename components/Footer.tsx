@@ -19,7 +19,7 @@ export default function Footer() {
           {/* Brand & Identity */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="flex items-center gap-2.5 mb-1.5">
-              <span className="w-8 h-8 rounded-xl bg-[#101726] border border-white/15 font-mono text-xs font-bold text-[#38bdf8] flex items-center justify-center shadow-sm">
+              <span className="w-8 h-8 rounded-xl bg-[#14141c] border border-white/15 font-mono text-xs font-bold text-[#a78bfa] flex items-center justify-center shadow-sm">
                 {personalInfo.initials}
               </span>
               <span className="text-base font-bold text-white tracking-tight">
@@ -40,7 +40,7 @@ export default function Footer() {
               href={personalInfo.meetingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#0281e0] via-[#1d6fe6] to-[#38bdf8] hover:from-[#38bdf8] hover:to-[#0281e0] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#0281e0]/30 transition-all cursor-pointer mr-1"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#7c5cff] via-[#6a4cf0] to-[#a78bfa] hover:from-[#a78bfa] hover:to-[#7c5cff] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#7c5cff]/30 transition-all cursor-pointer mr-1"
             >
               <Calendar className="w-4 h-4" />
               <span>Book a Meeting</span>
@@ -52,7 +52,7 @@ export default function Footer() {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-2xl bg-[#101726] border border-white/10 text-[#cbd5e1] hover:text-white hover:border-[#0281e0]/60 hover:shadow-lg hover:shadow-[#0281e0]/20 transition-all"
+              className="p-3 rounded-2xl bg-[#14141c] border border-white/10 text-[#cbd5e1] hover:text-white hover:border-[#7c5cff]/60 hover:shadow-lg hover:shadow-[#7c5cff]/20 transition-all"
               aria-label="GitHub Profile"
             >
               <GithubIcon className="w-4 h-4" />
@@ -62,7 +62,7 @@ export default function Footer() {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-2xl bg-[#101726] border border-white/10 text-[#cbd5e1] hover:text-white hover:border-[#0281e0]/60 hover:shadow-lg hover:shadow-[#0281e0]/20 transition-all"
+              className="p-3 rounded-2xl bg-[#14141c] border border-white/10 text-[#cbd5e1] hover:text-white hover:border-[#7c5cff]/60 hover:shadow-lg hover:shadow-[#7c5cff]/20 transition-all"
               aria-label="LinkedIn Profile"
             >
               <LinkedinIcon className="w-4 h-4" />
@@ -70,7 +70,7 @@ export default function Footer() {
             <motion.a
               whileHover={{ y: -3, scale: 1.05 }}
               href={`mailto:${personalInfo.email}`}
-              className="p-3 rounded-2xl bg-[#101726] border border-white/10 text-[#cbd5e1] hover:text-white hover:border-[#0281e0]/60 hover:shadow-lg hover:shadow-[#0281e0]/20 transition-all"
+              className="p-3 rounded-2xl bg-[#14141c] border border-white/10 text-[#cbd5e1] hover:text-white hover:border-[#7c5cff]/60 hover:shadow-lg hover:shadow-[#7c5cff]/20 transition-all"
               aria-label="Email Shivraj Singh"
             >
               <Mail className="w-4 h-4" />
@@ -79,7 +79,7 @@ export default function Footer() {
             <motion.button
               whileHover={{ y: -3, scale: 1.05 }}
               onClick={scrollToTop}
-              className="p-3 rounded-2xl bg-[#0281e0] hover:bg-[#0275cc] text-white shadow-md shadow-[#0281e0]/30 transition-all ml-1 cursor-pointer"
+              className="p-3 rounded-2xl bg-[#7c5cff] hover:bg-[#6a4be8] text-white shadow-md shadow-[#7c5cff]/30 transition-all ml-1 cursor-pointer"
               aria-label="Scroll back to top"
             >
               <ArrowUp className="w-4 h-4" />
@@ -97,8 +97,8 @@ export default function Footer() {
         {/* Bottom Copyright */}
         <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#94a3b8] gap-3">
           <span>&copy; 2026 {personalInfo.name}. All rights reserved.</span>
-          <span className="flex items-center gap-1.5 text-[#38bdf8]">
-            <span className="w-2 h-2 rounded-full bg-[#0281e0] animate-pulse" />
+          <span className="flex items-center gap-1.5 text-[#a78bfa]">
+            <span className="w-2 h-2 rounded-full bg-[#7c5cff] animate-pulse" />
             Available for remote and full-time opportunities.
           </span>
         </div>

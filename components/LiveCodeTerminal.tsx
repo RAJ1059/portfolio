@@ -23,7 +23,7 @@ const CODE_LINES: CodeLine[] = [
   },
   {
     tokens: [
-      { text: "interface ", color: "text-[#0281e0]" },
+      { text: "interface ", color: "text-[#7c5cff]" },
       { text: "SoftwareEngineer ", color: "text-white" },
       { text: "{", color: "text-slate-400" },
     ],
@@ -32,7 +32,7 @@ const CODE_LINES: CodeLine[] = [
     tokens: [
       { text: "  name", color: "text-[#a3a3a3]" },
       { text: ": ", color: "text-slate-500" },
-      { text: '"Shivraj Singh"', color: "text-[#93c5fd]" },
+      { text: '"Shivraj Singh"', color: "text-[#ddd6fe]" },
       { text: ";", color: "text-slate-500" },
     ],
   },
@@ -40,7 +40,7 @@ const CODE_LINES: CodeLine[] = [
     tokens: [
       { text: "  role", color: "text-[#a3a3a3]" },
       { text: ": ", color: "text-slate-500" },
-      { text: '"Full-Stack & WordPress Dev"', color: "text-[#93c5fd]" },
+      { text: '"Full-Stack & WordPress Dev"', color: "text-[#ddd6fe]" },
       { text: ";", color: "text-slate-500" },
     ],
   },
@@ -48,7 +48,7 @@ const CODE_LINES: CodeLine[] = [
     tokens: [
       { text: "  location", color: "text-[#a3a3a3]" },
       { text: ": ", color: "text-slate-500" },
-      { text: '"Indore, India"', color: "text-[#93c5fd]" },
+      { text: '"Indore, India"', color: "text-[#ddd6fe]" },
       { text: ";", color: "text-slate-500" },
     ],
   },
@@ -56,13 +56,13 @@ const CODE_LINES: CodeLine[] = [
     tokens: [
       { text: "  coreStack", color: "text-[#a3a3a3]" },
       { text: ": [", color: "text-slate-400" },
-      { text: '"React"', color: "text-[#38bdf8]" },
+      { text: '"React"', color: "text-[#a78bfa]" },
       { text: ", ", color: "text-slate-500" },
-      { text: '"Node.js"', color: "text-[#38bdf8]" },
+      { text: '"Node.js"', color: "text-[#a78bfa]" },
       { text: ", ", color: "text-slate-500" },
-      { text: '"MongoDB"', color: "text-[#38bdf8]" },
+      { text: '"MongoDB"', color: "text-[#a78bfa]" },
       { text: ", ", color: "text-slate-500" },
-      { text: '"WordPress"', color: "text-[#38bdf8]" },
+      { text: '"WordPress"', color: "text-[#a78bfa]" },
       { text: "];", color: "text-slate-400" },
     ],
   },
@@ -70,7 +70,7 @@ const CODE_LINES: CodeLine[] = [
     tokens: [
       { text: "  delivery", color: "text-[#a3a3a3]" },
       { text: ": ", color: "text-slate-500" },
-      { text: "true", color: "text-[#0281e0]" },
+      { text: "true", color: "text-[#7c5cff]" },
       { text: ";", color: "text-slate-500" },
     ],
   },
@@ -84,21 +84,21 @@ const CODE_LINES: CodeLine[] = [
   },
   {
     tokens: [
-      { text: "export async function ", color: "text-[#0281e0]" },
+      { text: "export async function ", color: "text-[#7c5cff]" },
       { text: "buildSolution", color: "text-white" },
       { text: "(", color: "text-slate-400" },
       { text: "project", color: "text-[#a3a3a3]" },
       { text: ": ", color: "text-slate-500" },
-      { text: "ClientGoal", color: "text-[#38bdf8]" },
+      { text: "ClientGoal", color: "text-[#a78bfa]" },
       { text: ") {", color: "text-slate-400" },
     ],
   },
   {
     tokens: [
-      { text: "  return await ", color: "text-[#0281e0]" },
+      { text: "  return await ", color: "text-[#7c5cff]" },
       { text: "engineerPipeline", color: "text-white" },
       { text: ".", color: "text-slate-500" },
-      { text: "deploy", color: "text-[#0281e0]" },
+      { text: "deploy", color: "text-[#7c5cff]" },
       { text: "({", color: "text-slate-400" },
     ],
   },
@@ -106,7 +106,7 @@ const CODE_LINES: CodeLine[] = [
     tokens: [
       { text: "    ux", color: "text-[#a3a3a3]" },
       { text: ": ", color: "text-slate-500" },
-      { text: '"Responsive & High-Conversion"', color: "text-[#93c5fd]" },
+      { text: '"Responsive & High-Conversion"', color: "text-[#ddd6fe]" },
       { text: ",", color: "text-slate-500" },
     ],
   },
@@ -114,7 +114,7 @@ const CODE_LINES: CodeLine[] = [
     tokens: [
       { text: "    apis", color: "text-[#a3a3a3]" },
       { text: ": ", color: "text-slate-500" },
-      { text: '"Secure REST & MERN"', color: "text-[#93c5fd]" },
+      { text: '"Secure REST & MERN"', color: "text-[#ddd6fe]" },
       { text: ",", color: "text-slate-500" },
     ],
   },
@@ -122,7 +122,7 @@ const CODE_LINES: CodeLine[] = [
     tokens: [
       { text: "    performance", color: "text-[#a3a3a3]" },
       { text: ": ", color: "text-slate-500" },
-      { text: '"Optimized Core Web Vitals"', color: "text-[#93c5fd]" },
+      { text: '"Optimized Core Web Vitals"', color: "text-[#ddd6fe]" },
     ],
   },
   {
@@ -188,7 +188,7 @@ export default function LiveCodeTerminal() {
         </div>
 
         <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#a3a3a3]">
-          <Terminal className="w-3.5 h-3.5 text-[#0281e0]" />
+          <Terminal className="w-3.5 h-3.5 text-[#7c5cff]" />
           <span>fullstack-architecture.ts</span>
         </div>
 
@@ -205,11 +205,11 @@ export default function LiveCodeTerminal() {
             <span
               className={`inline-block w-2 h-2 rounded-full ${
                 isTyping
-                  ? "bg-[#0281e0] animate-ping"
-                  : "bg-[#0281e0]"
+                  ? "bg-[#7c5cff] animate-ping"
+                  : "bg-[#7c5cff]"
               }`}
             />
-            <span className="text-[10px] font-mono text-[#93c5fd]">
+            <span className="text-[10px] font-mono text-[#ddd6fe]">
               {isTyping ? "writing..." : "ready"}
             </span>
           </div>
@@ -249,7 +249,7 @@ export default function LiveCodeTerminal() {
                   {lineTokens.length === 0 ? (
                     <span>
                       {isCurrentLine && !cursorRendered && (
-                        <span className="inline-block w-1.5 h-3.5 bg-[#0281e0] ml-0.5 animate-pulse align-middle" />
+                        <span className="inline-block w-1.5 h-3.5 bg-[#7c5cff] ml-0.5 animate-pulse align-middle" />
                       )}
                     </span>
                   ) : (
@@ -279,14 +279,14 @@ export default function LiveCodeTerminal() {
                       return (
                         <span key={tokenIdx} className={token.color}>
                           {visiblePortion}
-                          <span className="inline-block w-1.5 h-3.5 bg-[#0281e0] ml-0.5 animate-pulse align-middle" />
+                          <span className="inline-block w-1.5 h-3.5 bg-[#7c5cff] ml-0.5 animate-pulse align-middle" />
                         </span>
                       );
                     })
                   )}
 
                   {isCurrentLine && !cursorRendered && (
-                    <span className="inline-block w-1.5 h-3.5 bg-[#0281e0] ml-0.5 animate-pulse align-middle" />
+                    <span className="inline-block w-1.5 h-3.5 bg-[#7c5cff] ml-0.5 animate-pulse align-middle" />
                   )}
                 </div>
               </div>
@@ -298,10 +298,10 @@ export default function LiveCodeTerminal() {
       {/* Terminal Footer Status Bar */}
       <div className="px-4 py-2 bg-[#0c0c0c] border-t border-[#1c1c1c] flex items-center justify-between text-[11px] font-mono text-[#737373]">
         <div className="flex items-center gap-2">
-          <span className="text-[#0281e0]">git:(main)</span>
+          <span className="text-[#7c5cff]">git:(main)</span>
           <span>•</span>
           <span className="flex items-center gap-1 text-[#a3a3a3]">
-            <CheckCircle2 className="w-3 h-3 text-[#0281e0]" />
+            <CheckCircle2 className="w-3 h-3 text-[#7c5cff]" />
             {isTyping ? "compiling AST..." : "All systems ready"}
           </span>
         </div>

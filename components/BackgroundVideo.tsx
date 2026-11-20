@@ -52,17 +52,17 @@ export default function BackgroundVideo() {
       </video>
 
       {/* Cinematic Color Wash — Deep Slate Obsidian with Subtle Crimson Atmosphere */}
-      <div className="absolute inset-0 bg-[#0b0f17]/60 mix-blend-multiply" />
+      <div className="absolute inset-0 bg-[#0e0e15]/60 mix-blend-multiply" />
 
       {/* Gradient Fade Top & Bottom */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f17]/90 via-transparent to-[#0b0f17]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0e0e15]/90 via-transparent to-[#0e0e15]" />
 
       {/* Radial Vignette: keeps center text and live terminal 100% legible */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 50%, transparent 15%, rgba(11, 15, 23, 0.7) 55%, #0b0f17 95%)",
+            "radial-gradient(ellipse at 50% 50%, transparent 15%, rgba(11, 15, 23, 0.7) 55%, #0e0e15 95%)",
         }}
       />
 

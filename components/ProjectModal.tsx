@@ -50,7 +50,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           {/* Header Bar */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-[#1c1c1c] bg-[#0f0f0f]">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#0281e0]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#7c5cff]" />
               <span className="text-xs font-mono text-[#a3a3a3] uppercase tracking-wider">
                 {project.category} {"// Architecture Breakdown"}
               </span>
@@ -67,7 +67,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           {/* Modal Scrollable Content */}
           <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
             {project.imageUrl && (
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-[#070b14] border border-white/10 shadow-lg">
+              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-[#0a0a0f] border border-white/10 shadow-lg">
                 <img
                   src={project.imageUrl}
                   alt={project.title}
@@ -87,10 +87,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             {/* Core Deliverable / Technical Solution Highlight */}
             {project.metricsOrOutcome && (
-              <div className="p-4 rounded-xl bg-[#0281e0]/10 border border-[#0281e0]/25 flex items-start gap-3">
-                <Sparkles className="w-5 h-5 text-[#38bdf8] shrink-0 mt-0.5" />
+              <div className="p-4 rounded-xl bg-[#7c5cff]/10 border border-[#7c5cff]/25 flex items-start gap-3">
+                <Sparkles className="w-5 h-5 text-[#a78bfa] shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="text-xs font-mono uppercase tracking-wider text-[#38bdf8]">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-[#a78bfa]">
                     Production Result &amp; Classification
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-200 mt-1 font-medium">
@@ -112,7 +112,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                       key={i}
                       className="p-3 rounded-xl bg-[#070707] border border-[#1a1a1a] flex items-start gap-2.5"
                     >
-                      <CheckCircle className="w-4 h-4 text-[#0281e0] shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-[#7c5cff] shrink-0 mt-0.5" />
                       <span className="text-xs text-[#a3a3a3] leading-relaxed">
                         {point}
                       </span>
@@ -153,7 +153,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0281e0] hover:bg-[#0275cc] text-white text-xs font-semibold shadow-md shadow-[#0281e0]/25 transition-all"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#7c5cff] hover:bg-[#6a4be8] text-white text-xs font-semibold shadow-md shadow-[#7c5cff]/25 transition-all"
                 >
                   <span>Open Live Project</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />

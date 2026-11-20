@@ -25,7 +25,7 @@ const coreCapabilities = [
 
 export default function About() {
   return (
-    <section id="about" className="py-28 relative bg-[#080c14] border-t border-white/10">
+    <section id="about" className="py-28 relative bg-[#0a0a0f] border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Narrative Story in Sanjay Menon Editorial Style with High Contrast */}
@@ -39,23 +39,23 @@ export default function About() {
             {/* Header with Profile Picture */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 pb-2">
               <div className="relative group shrink-0">
-                <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#0281e0] via-[#38bdf8]/40 to-transparent rounded-2xl blur-md opacity-40 group-hover:opacity-75 transition duration-500" />
-                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border border-white/15 bg-[#101726] shadow-xl shadow-black/50">
+                <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#7c5cff] via-[#a78bfa]/40 to-transparent rounded-2xl blur-md opacity-40 group-hover:opacity-75 transition duration-500" />
+                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border border-white/15 bg-[#14141c] shadow-xl shadow-black/50">
                   <img
                     src="/shivraj-profile.jpg"
                     alt="Shivraj Singh - Full-Stack & WordPress Developer"
                     className="w-full h-full object-cover object-center contrast-110 group-hover:scale-105 transition-all duration-500"
                   />
                 </div>
-                <div className="absolute -bottom-2 -right-1.5 bg-[#101726]/90 backdrop-blur-sm border border-[#0281e0]/40 rounded-full px-2.5 py-0.5 text-[10px] font-mono text-[#38bdf8] flex items-center gap-1.5 shadow-lg">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#0281e0] animate-pulse" />
+                <div className="absolute -bottom-2 -right-1.5 bg-[#14141c]/90 backdrop-blur-sm border border-[#7c5cff]/40 rounded-full px-2.5 py-0.5 text-[10px] font-mono text-[#a78bfa] flex items-center gap-1.5 shadow-lg">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#7c5cff] animate-pulse" />
                   <span>Shivraj</span>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#101726] border border-white/10 text-[#38bdf8] text-xs font-mono uppercase tracking-wider shadow-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#0281e0]" />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#14141c] border border-white/10 text-[#a78bfa] text-xs font-mono uppercase tracking-wider shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#7c5cff]" />
                   <span>ABOUT ME</span>
                 </div>
 
@@ -70,7 +70,7 @@ export default function About() {
                 My journey into software engineering began with a passion for turning ideas into working digital realities. I spent years mastering the fundamentals — starting from core Python and algorithmic programming to scalable full-stack JavaScript architectures and modern CMS ecosystems.
               </p>
               <p>
-                Today, at <span className="text-white font-bold bg-[#0281e0]/10 px-2 py-0.5 rounded border border-[#0281e0]/30">Embtel Web Solutions</span> and through consulting for international businesses at <span className="text-white font-bold bg-[#0281e0]/10 px-2 py-0.5 rounded border border-[#0281e0]/30">TekPlus</span>, I engineer high-performance web applications and custom WordPress architectures. I enjoy solving problems at the intersection of complex backend logic, responsive design, and business conversion goals.
+                Today, at <span className="text-white font-bold bg-[#7c5cff]/10 px-2 py-0.5 rounded border border-[#7c5cff]/30">Embtel Web Solutions</span> and through consulting for international businesses at <span className="text-white font-bold bg-[#7c5cff]/10 px-2 py-0.5 rounded border border-[#7c5cff]/30">TekPlus</span>, I engineer high-performance web applications and custom WordPress architectures. I enjoy solving problems at the intersection of complex backend logic, responsive design, and business conversion goals.
               </p>
               <p>
                 Whether building a multi-step custom portal, optimizing Core Web Vitals to sub-second load times, or structuring clean RESTful API pipelines, I believe in software that simply works — clean, maintainable, and built to scale.
@@ -79,7 +79,7 @@ export default function About() {
 
             {/* Signature Sign-Off */}
             <div className="pt-4 flex items-center gap-3">
-              <p className="text-3xl font-serif italic text-[#38bdf8]">
+              <p className="text-3xl font-sans italic text-[#a78bfa]">
                 Shivraj.
               </p>
               <span className="text-xs font-mono text-[#94a3b8]">
@@ -96,12 +96,12 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className="lg:col-span-5"
           >
-            <div className="bg-[#101726] p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl shadow-black/60 relative overflow-hidden">
+            <div className="bg-[#14141c] p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl shadow-black/60 relative overflow-hidden">
               {/* Card top accent line */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#0281e0] to-transparent" />
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#7c5cff] to-transparent" />
 
               <div className="flex items-center gap-2 mb-6">
-                <Sparkles className="w-5 h-5 text-[#0281e0]" />
+                <Sparkles className="w-5 h-5 text-[#7c5cff]" />
                 <h3 className="text-xs font-mono uppercase tracking-wider text-[#cbd5e1] font-bold">
                   Core Engineering Capabilities
                 </h3>
@@ -112,10 +112,10 @@ export default function About() {
                   <motion.div
                     key={cap.title}
                     whileHover={{ x: 4 }}
-                    className="p-4 rounded-2xl bg-[#090e1a] border border-white/10 hover:border-[#0281e0]/50 hover:bg-[#0c1424] transition-all duration-200"
+                    className="p-4 rounded-2xl bg-[#0d0d14] border border-white/10 hover:border-[#7c5cff]/50 hover:bg-[#0c1424] transition-all duration-200"
                   >
                     <div className="flex items-center gap-2 mb-1">
-                      <CheckCircle2 className="w-4 h-4 text-[#0281e0] shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-[#7c5cff] shrink-0" />
                       <h4 className="text-sm font-bold text-white tracking-tight">
                         {cap.title}
                       </h4>
@@ -129,8 +129,8 @@ export default function About() {
 
               <div className="mt-6 pt-5 border-t border-white/10 flex items-center justify-between text-xs font-mono text-[#94a3b8]">
                 <span>Status: Active Senior Engineer</span>
-                <span className="text-[#38bdf8] font-semibold flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-[#0281e0] animate-pulse" />
+                <span className="text-[#a78bfa] font-semibold flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-[#7c5cff] animate-pulse" />
                   Open to Projects
                 </span>
               </div>

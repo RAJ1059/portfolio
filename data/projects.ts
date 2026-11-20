@@ -170,4 +170,104 @@ export const projects: Project[] = [
     ],
     metricsOrOutcome: "Operational Automation",
   },
+  {
+    id: "sample-ecommerce",
+    title: "Shopfront — E-Commerce Store",
+    slug: "sample-ecommerce",
+    category: "Full-Stack",
+    projectType: "E-Commerce Platform",
+    description:
+      "Sample concept: e-commerce store UI used as a placeholder until a real project is added.",
+    longDescription:
+      "Placeholder showcase entry for a e-commerce store. Replace this with a real project (title, screenshot, links and highlights) in data/projects.ts.",
+    technologies: ["React.js", "Node.js", "MongoDB", "Stripe"],
+    imageUrl: "/projects/sample-ecommerce.svg",
+    featured: false,
+    highlights: [
+      "Sample entry — replace with real project details",
+      "Responsive, component-based UI",
+      "Clean layout and accessible navigation"
+    ],
+    metricsOrOutcome: "Sample Concept",
+  },
+  {
+    id: "sample-saas",
+    title: "Metrica — SaaS Analytics Dashboard",
+    slug: "sample-saas",
+    category: "Full-Stack",
+    projectType: "SaaS Dashboard",
+    description:
+      "Sample concept: saas analytics dashboard UI used as a placeholder until a real project is added.",
+    longDescription:
+      "Placeholder showcase entry for a saas analytics dashboard. Replace this with a real project (title, screenshot, links and highlights) in data/projects.ts.",
+    technologies: ["React.js", "TypeScript", "REST APIs", "Charts"],
+    imageUrl: "/projects/sample-saas.svg",
+    featured: false,
+    highlights: [
+      "Sample entry — replace with real project details",
+      "Responsive, component-based UI",
+      "Clean layout and accessible navigation"
+    ],
+    metricsOrOutcome: "Sample Concept",
+  },
+  {
+    id: "sample-restaurant",
+    title: "Bella Tavola — Restaurant & Booking",
+    slug: "sample-restaurant",
+    category: "WordPress",
+    projectType: "Restaurant Website",
+    description:
+      "Sample concept: restaurant & booking UI used as a placeholder until a real project is added.",
+    longDescription:
+      "Placeholder showcase entry for a restaurant & booking. Replace this with a real project (title, screenshot, links and highlights) in data/projects.ts.",
+    technologies: ["WordPress", "Elementor", "PHP", "Booking"],
+    imageUrl: "/projects/sample-restaurant.svg",
+    featured: false,
+    highlights: [
+      "Sample entry — replace with real project details",
+      "Responsive, component-based UI",
+      "Clean layout and accessible navigation"
+    ],
+    metricsOrOutcome: "Sample Concept",
+  },
+  {
+    id: "sample-realestate",
+    title: "Haven Homes — Real Estate Listings",
+    slug: "sample-realestate",
+    category: "Frontend",
+    projectType: "Listings Portal",
+    description:
+      "Sample concept: real estate listings UI used as a placeholder until a real project is added.",
+    longDescription:
+      "Placeholder showcase entry for a real estate listings. Replace this with a real project (title, screenshot, links and highlights) in data/projects.ts.",
+    technologies: ["React.js", "Tailwind CSS", "Maps API"],
+    imageUrl: "/projects/sample-realestate.svg",
+    featured: false,
+    highlights: [
+      "Sample entry — replace with real project details",
+      "Responsive, component-based UI",
+      "Clean layout and accessible navigation"
+    ],
+    metricsOrOutcome: "Sample Concept",
+  },
+  {
+    id: "sample-fitness",
+    title: "Pulse Fit — Fitness Tracker App",
+    slug: "sample-fitness",
+    category: "Software",
+    projectType: "Fitness App",
+    description:
+      "Sample concept: fitness tracker app UI used as a placeholder until a real project is added.",
+    longDescription:
+      "Placeholder showcase entry for a fitness tracker app. Replace this with a real project (title, screenshot, links and highlights) in data/projects.ts.",
+    technologies: ["Python", "SQL", "REST APIs"],
+    imageUrl: "/projects/sample-fitness.svg",
+    featured: false,
+    highlights: [
+      "Sample entry — replace with real project details",
+      "Responsive, component-based UI",
+      "Clean layout and accessible navigation"
+    ],
+    metricsOrOutcome: "Sample Concept",
+  },
 ];

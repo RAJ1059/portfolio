@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 576" width="800" height="576">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#34d399"/></linearGradient>
+<linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#08150f"/><stop offset="1" stop-color="#0a0a0f"/></linearGradient></defs>
+<rect width="800" height="576" fill="url(#b)"/>
+<rect x="0" y="0" width="800" height="56" fill="#ffffff" fill-opacity=".05"/>
+<circle cx="32" cy="28" r="12" fill="url(#g)"/>
+<text x="54" y="34" font-family="Arial,sans-serif" font-weight="700" font-size="18" fill="#fff">Bella Tavola</text>
+<g fill="#ffffff" fill-opacity=".55" font-family="Arial,sans-serif" font-size="14"><text x="470" y="33">Home</text><text x="535" y="33">About</text><text x="600" y="33">Services</text><text x="680" y="33">Contact</text></g>
+<text x="56" y="170" font-family="Arial,sans-serif" font-weight="800" font-size="44" fill="#fff">Restaurant & Booking</text>
+<rect x="56" y="196" width="340" height="10" rx="5" fill="#fff" fill-opacity=".25"/>
+<rect x="56" y="218" width="270" height="10" rx="5" fill="#fff" fill-opacity=".18"/>
+<rect x="56" y="258" width="150" height="46" rx="23" fill="url(#g)"/>
+<text x="131" y="287" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="15" fill="#fff">Get Started</text>
+<rect x="56" y="350" width="200" height="150" rx="16" fill="#fff" fill-opacity=".07"/>
+<rect x="276" y="350" width="200" height="150" rx="16" fill="#fff" fill-opacity=".07"/>
+<rect x="496" y="350" width="248" height="150" rx="16" fill="url(#g)" fill-opacity=".35"/>
+<rect x="520" y="100" width="224" height="200" rx="20" fill="url(#g)" fill-opacity=".9"/>
+</svg>

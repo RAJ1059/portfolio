@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import {
   ChevronLeft,
@@ -18,272 +18,367 @@ interface Project3DScrollerProps {
   onSelect: (project: Project) => void;
 }
 
+// Diagonal 3D "staircase" scroller: screenshot panels stack along a rising,
+// receding diagonal and travel along it as you scroll.
+const SPEED = 0.32; // cards / second while drifting
+const MOMENTUM = 0.8;
+const CORNER = 10;
+const VISIBLE_BEHIND = 2.2; // how far past the front card still shows
+const VISIBLE_AHEAD = 6.2; // how many cards ahead of the front show
+
+const mod = (n: number, m: number) => ((n % m) + m) % m;
+const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+
 export default function Project3DScroller({
   projects,
   onSelect,
 }: Project3DScrollerProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
   const total = projects.length;
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const nextSlide = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % total);
+  const [active, setActive] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [dragging, setDragging] = useState(false);
+  const [cardW, setCardW] = useState(420);
+
+  const tileRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const pos = useRef(0); // fractional index of the front card
+  const target = useRef<number | null>(null);
+  const vel = useRef(0); // cards / second
+  const hovered = useRef(false);
+  const drag = useRef({ on: false, x: 0, t: 0, moved: 0 });
+  const autoplay = useRef(true);
+  const reduced = useRef(false);
+  const activeRef = useRef(0);
+  const dims = useRef({ w: 420, h: 270 });
+
+  useEffect(() => {
+    autoplay.current = isAutoPlaying;
+  }, [isAutoPlaying]);
+
+  useEffect(() => {
+    const resize = () => {
+      const w = window.innerWidth;
+      setCardW(w < 480 ? 250 : w < 768 ? 320 : w < 1100 ? 380 : 440);
+    };
+    resize();
+    window.addEventListener("resize", resize);
+    reduced.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return () => window.removeEventListener("resize", resize);
+  }, []);
+
+  const cardH = Math.round(cardW * 0.64);
+  dims.current = { w: cardW, h: cardH };
+
+  const goTo = useCallback(
+    (i: number) => {
+      if (!total) return;
+      const base = Math.round(pos.current);
+      // shortest way round
+      let d = mod(i - base, total);
+      if (d > total / 2) d -= total;
+      target.current = base + d;
+      vel.current = 0;
+    },
+    [total]
+  );
+  const shift = useCallback(
+    (d: number) => {
+      target.current = Math.round(pos.current) + d;
+      vel.current = 0;
+    },
+    []
+  );
+
+  useEffect(() => {
+    pos.current = 0;
+    target.current = null;
+    activeRef.current = 0;
+    setActive(0);
   }, [total]);
 
-  const prevSlide = useCallback(() => {
-    setActiveIndex((prev) => (prev - 1 + total) % total);
+  useEffect(() => {
+    if (!total) return;
+    let raf = 0;
+    let last = performance.now();
+
+    const render = () => {
+      const { w, h } = dims.current;
+      const p = pos.current;
+      for (let i = 0; i < total; i++) {
+        const tile = tileRefs.current[i];
+        if (!tile) continue;
+        // signed distance from front card, wrapped so the stack loops
+        const d = mod(i - p + VISIBLE_BEHIND + 1, total) - (VISIBLE_BEHIND + 1);
+
+        if (d < -VISIBLE_BEHIND - 1 || d > VISIBLE_AHEAD + 0.8 || total === 0) {
+          tile.style.visibility = "hidden";
+          continue;
+        }
+        tile.style.visibility = "visible";
+
+        const x = (d - 2.2) * w * 0.34;
+        const y = -(d - 2.2) * h * 0.33 + h * 0.08;
+        const z = -d * 150;
+        tile.style.transform =
+          `perspective(1500px) translate3d(${x}px, ${y}px, ${z}px) rotateY(-34deg) rotateX(7deg) rotateZ(-0.5deg)`;
+        tile.style.zIndex = String(500 - Math.round(d * 20));
+
+        // fade in/out at both ends, darken with depth
+        const fadeIn = d < 0 ? clamp(1 + (d + 0.2) / 1.6, 0, 1) : 1;
+        const fadeOut = d > VISIBLE_AHEAD - 1.4 ? clamp((VISIBLE_AHEAD + 0.8 - d) / 2.2, 0, 1) : 1;
+        tile.style.opacity = String(Math.min(fadeIn, fadeOut));
+        tile.style.setProperty("--cc-depth", String(clamp(d * 0.09, 0, 0.55)));
+        if (Math.abs(d) < 0.5) tile.setAttribute("data-front", "");
+        else tile.removeAttribute("data-front");
+      }
+      const idx = mod(Math.round(p), total);
+      if (idx !== activeRef.current) {
+        activeRef.current = idx;
+        setActive(idx);
+      }
+    };
+
+    const tick = (now: number) => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+
+      if (!drag.current.on) {
+        if (target.current !== null) {
+          const diff = target.current - pos.current;
+          pos.current += diff * Math.min(1, dt * 5);
+          if (Math.abs(diff) < 0.002) {
+            pos.current = target.current;
+            target.current = null;
+          }
+        } else if (Math.abs(vel.current) > 0.15) {
+          pos.current += vel.current * dt;
+          vel.current *= Math.pow(0.05, dt);
+          if (Math.abs(vel.current) <= 0.15) {
+            vel.current = 0;
+            target.current = Math.round(pos.current);
+          }
+        } else if (autoplay.current && !hovered.current && !reduced.current && total > 1) {
+          pos.current += SPEED * dt;
+        }
+      }
+      render();
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [total]);
 
-  const goToSlide = (idx: number) => {
-    setActiveIndex(idx);
+  // Keyboard
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") shift(-1);
+    if (e.key === "ArrowRight") shift(1);
+    if (e.key === "Enter") onSelect(projects[activeRef.current]);
   };
 
-  // Autoplay interval
-  useEffect(() => {
-    if (!isAutoPlaying || isHovered || total <= 1) return;
+  // Drag
+  const onPointerDown = (e: React.PointerEvent) => {
+    drag.current = { on: true, x: e.clientX, t: performance.now(), moved: 0 };
+    target.current = null;
+    vel.current = 0;
+    setDragging(true);
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    const d = drag.current;
+    if (!d.on) return;
+    const now = performance.now();
+    const dx = e.clientX - d.x;
+    const dt = Math.max(1, now - d.t) / 1000;
+    d.moved += Math.abs(dx);
+    const perCard = dims.current.w * 0.34;
+    pos.current -= dx / perCard;
+    vel.current = (-dx / perCard / dt) * MOMENTUM;
+    d.x = e.clientX;
+    d.t = now;
+  };
+  const onPointerUp = () => {
+    const d = drag.current;
+    if (!d.on) return;
+    d.on = false;
+    setDragging(false);
+    if (Math.abs(vel.current) <= 0.15 || d.moved < 4) {
+      vel.current = 0;
+      target.current = Math.round(pos.current);
+    }
+  };
 
-    timerRef.current = setInterval(() => {
-      nextSlide();
-    }, 4000);
+  const onTileClick = (i: number) => {
+    if (drag.current.moved > 6) return;
+    if (i === activeRef.current) onSelect(projects[i]);
+    else goTo(i);
+  };
 
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [isAutoPlaying, isHovered, nextSlide, total]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") prevSlide();
-      if (e.key === "ArrowRight") nextSlide();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [nextSlide, prevSlide]);
-
+  if (!total) return null;
+  const current = projects[active] ?? projects[0];
+  
   return (
     <div
       className="relative w-full max-w-7xl mx-auto flex flex-col items-center select-none"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => (hovered.current = true)}
+      onMouseLeave={() => (hovered.current = false)}
     >
-      {/* 1. TOP PAGINATION INDICATOR (Matching Reference Image) */}
-      <div className="flex items-center justify-center gap-2.5 mb-8 sm:mb-10">
-        {projects.map((p, idx) => {
-          const isActive = idx === activeIndex;
-          return (
-            <button
-              key={p.id}
-              onClick={() => goToSlide(idx)}
-              aria-label={`Go to slide ${idx + 1}: ${p.title}`}
-              className="relative py-2 px-1 focus:outline-none cursor-pointer group"
-            >
-              <motion.div
-                layout
-                animate={{
-                  width: isActive ? 28 : 8,
-                  backgroundColor: isActive ? "#0281e0" : "rgba(255, 255, 255, 0.25)",
-                  boxShadow: isActive
-                    ? "0 0 16px rgba(56, 189, 248, 0.9), 0 0 6px rgba(2, 129, 224, 0.8)"
-                    : "none",
-                }}
-                transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                className="h-2 rounded-full group-hover:bg-white/60 transition-colors"
-              />
-            </button>
-          );
-        })}
-      </div>
-
-      {/* 2. 3D COVERFLOW STACK STAGE */}
       <div
-        className="relative w-full h-[540px] sm:h-[590px] md:h-[620px] flex items-center justify-center overflow-visible"
-        style={{ perspective: 1200 }}
+        className="relative w-full rounded-[28px] border border-white/10 bg-[#0a0a10] overflow-hidden"
+        style={{ height: Math.max(520, cardH * 2 + 40) }}
       >
-        {projects.map((project, idx) => {
-          // Circular offset calculation
-          let offset = (idx - activeIndex) % total;
-          if (offset > total / 2) offset -= total;
-          if (offset < -total / 2) offset += total;
-
-          const isCenter = offset === 0;
-          const isVisible = Math.abs(offset) <= 2;
-
-          if (!isVisible) return null;
-
-          // Responsive offsets:
-          const xOffsetMobile = offset * 210;
-          const xOffsetDesktop = offset * 330;
-          const rotateY = offset * -26;
-          const scale = isCenter ? 1 : 0.84 - Math.abs(offset) * 0.06;
-          const zIndex = 30 - Math.abs(offset) * 10;
-          const opacity = isCenter ? 1 : Math.max(0.2, 0.72 - Math.abs(offset) * 0.25);
-
-          return (
-            <motion.div
-              key={project.id}
-              onClick={() => {
-                if (!isCenter) {
-                  goToSlide(idx);
-                }
-              }}
-              animate={{
-                x: typeof window !== "undefined" && window.innerWidth < 640 ? xOffsetMobile : xOffsetDesktop,
-                rotateY,
-                scale,
-                zIndex,
-                opacity,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 260,
-                damping: 26,
-              }}
-              style={{
-                transformStyle: "preserve-3d",
-              }}
-              className={`absolute top-0 bottom-0 my-auto w-[310px] sm:w-[380px] md:w-[410px] h-[500px] sm:h-[540px] rounded-[28px] p-4 sm:p-5 flex flex-col justify-between transition-all duration-300 ${
-                isCenter
-                  ? "bg-[#0d1422] border-2 border-[#0281e0]/80 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_30px_rgba(2,129,224,0.3)] ring-1 ring-[#38bdf8]/40"
-                  : "bg-[#0b101c]/90 border border-white/10 shadow-xl shadow-black/60 cursor-pointer hover:border-white/30 hover:opacity-90"
-              }`}
-            >
-              {/* Top Image Banner */}
-              <div>
-                <div className="relative w-full aspect-[16/9.5] rounded-2xl overflow-hidden bg-[#070b14] border border-white/10 group/img">
-                  <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 640px) 310px, 410px"
-                    className={`object-cover transition-transform duration-700 ease-out ${
-                      isCenter ? "group-hover/img:scale-105" : "brightness-75 contrast-90"
-                    }`}
-                    priority={idx === 0 || idx === 1}
-                  />
-
-                  {/* Vignette gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d1422] via-transparent to-transparent opacity-60" />
-
-                  {/* Badge pill */}
-                  <div className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono font-medium text-[#38bdf8] uppercase tracking-wider">
-                    {project.category}
-                  </div>
-                </div>
-
-                {/* Project Title (All Caps Bold as in Reference) */}
-                <h3 className="mt-4 text-lg sm:text-xl font-extrabold text-white tracking-wider uppercase line-clamp-1">
-                  {project.title}
-                </h3>
-
-                {/* Short Description */}
-                <p className="mt-2 text-xs sm:text-sm text-[#cbd5e1] leading-relaxed line-clamp-2">
-                  {project.description}
-                </p>
-
-                {/* Technology Badges (Rounded Pills as in Reference) */}
-                <div className="mt-4 flex flex-wrap gap-1.5 sm:gap-2">
-                  {project.technologies.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono uppercase tracking-wider bg-[#131d2e] border border-white/10 text-[#cbd5e1]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.length > 3 && (
-                    <span className="px-2 py-1 rounded-full text-[10px] font-mono text-[#64748b] bg-[#090e1a] border border-white/5">
-                      +{project.technologies.length - 3}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Bottom Actions */}
-              <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-3">
-                {/* EXPLORE Button - Glowing Blue Gradient Pill (Exact Reference Style) */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onSelect(project);
-                  }}
-                  className={`relative cursor-pointer rounded-full font-extrabold text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 ${
-                    isCenter
-                      ? "px-8 py-3 bg-gradient-to-r from-[#0281e0] via-[#1d6fe6] to-[#38bdf8] text-white shadow-[0_0_24px_rgba(2,129,224,0.65)] hover:shadow-[0_0_35px_rgba(56,189,248,0.9)] hover:scale-[1.04] active:scale-[0.97]"
-                      : "px-5 py-2 bg-white/10 text-white/80 hover:bg-[#0281e0] hover:text-white"
-                  }`}
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>EXPLORE</span>
-                </button>
-
-                {/* Live Link Icon */}
-                {project.websiteUrl && isCenter && (
-                  <a
-                    href={project.websiteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="p-2.5 rounded-full bg-[#131d2e] hover:bg-[#0281e0] border border-white/10 hover:border-transparent text-[#cbd5e1] hover:text-white transition-all shadow-md"
-                    aria-label={`Open live site for ${project.title}`}
+        <div
+          className="circular-carousel"
+          data-ready=""
+          data-draggable=""
+          {...(dragging ? { "data-dragging": "" } : {})}
+          tabIndex={0}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Featured projects"
+          onKeyDown={onKeyDown}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+          style={
+            {
+              "--cc-fade": "#000000",
+              "--cc-radius": `${CORNER}px`,
+            } as React.CSSProperties
+          }
+        >
+          <div className="circular-carousel__view">
+            <div className="circular-carousel__stage">
+              <div className="circular-carousel__camera">
+                {projects.map((project, i) => (
+                  <div
+                    key={project.id}
+                    className="circular-carousel__tile"
+                    ref={(el) => {
+                      tileRefs.current[i] = el;
+                    }}
+                    role="group"
+                    aria-label={`${i + 1} of ${total}: ${project.title}`}
+                    onClick={() => onTileClick(i)}
+                    style={{
+                      width: cardW,
+                      height: cardH,
+                      left: -cardW / 2,
+                      top: -cardH / 2,
+                      visibility: "hidden",
+                    }}
                   >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                )}
+                    <div className="circular-carousel__frame">
+                      <Image
+                        src={project.imageUrl}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 768px) 320px, 440px"
+                        draggable={false}
+                        className="circular-carousel__photo"
+                        priority={i < 4}
+                      />
+                      <div className="circular-carousel__shade" />
+                    </div>
+                  </div>
+                ))}
               </div>
-            </motion.div>
-          );
-        })}
-      </div>
+            </div>
+          </div>
+        </div>
 
-      {/* 3. BOTTOM CONTROLS & AUTO-SCROLL STATUS */}
-      <div className="mt-8 flex items-center justify-between w-full max-w-md px-4">
-        {/* Previous Button */}
         <button
-          onClick={prevSlide}
+          onClick={() => shift(-1)}
           aria-label="Previous project"
-          className="p-3 rounded-full bg-[#101726] border border-white/15 text-white hover:bg-[#0281e0] hover:border-transparent transition-all shadow-lg shadow-black/50 cursor-pointer active:scale-95"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 p-2.5 rounded-full bg-black/50 backdrop-blur border border-white/15 text-white hover:bg-[#7c5cff] transition-colors"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
-
-        {/* Center Indicators & Autoplay Toggle */}
-        <div className="flex items-center gap-4 bg-[#101726] px-4 py-2 rounded-full border border-white/10">
-          <button
-            onClick={() => setIsAutoPlaying((prev) => !prev)}
-            className="flex items-center gap-1.5 text-xs font-mono text-[#38bdf8] hover:text-white transition-colors cursor-pointer"
-            aria-label={isAutoPlaying ? "Pause auto-scroll" : "Resume auto-scroll"}
-          >
-            {isAutoPlaying ? (
-              <>
-                <Pause className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">LIVE SCROLL</span>
-              </>
-            ) : (
-              <>
-                <Play className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">PAUSED</span>
-              </>
-            )}
-          </button>
-
-          <span className="text-xs font-mono text-[#64748b]">
-            <span className="text-white font-bold">{String(activeIndex + 1).padStart(2, "0")}</span>
-            {" / "}
-            {String(total).padStart(2, "0")}
-          </span>
-        </div>
-
-        {/* Next Button */}
         <button
-          onClick={nextSlide}
+          onClick={() => shift(1)}
           aria-label="Next project"
-          className="p-3 rounded-full bg-[#101726] border border-white/15 text-white hover:bg-[#0281e0] hover:border-transparent transition-all shadow-lg shadow-black/50 cursor-pointer active:scale-95"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 p-2.5 rounded-full bg-black/50 backdrop-blur border border-white/15 text-white hover:bg-[#7c5cff] transition-colors"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
+      </div>
+
+      {/* Caption for the front project */}
+      <div className="w-full mt-4 flex items-center justify-between gap-4 rounded-2xl bg-[#14141c] border border-white/10 px-5 py-4">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current.id}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="min-w-0"
+          >
+            <h3 className="text-base sm:text-lg font-bold text-white truncate">
+              {current.title}
+            </h3>
+            <p className="text-xs sm:text-sm text-[#94a3b8] truncate">
+              {current.projectType} · {current.technologies.slice(0, 3).join(", ")}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="flex items-center gap-2 shrink-0">
+          {current.websiteUrl && (
+            <a
+              href={current.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open live site for ${current.title}`}
+              className="p-2.5 rounded-full bg-[#1a1a25] hover:bg-[#7c5cff] border border-white/10 text-[#cbd5e1] hover:text-white transition-colors"
+            >
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          )}
+          <button
+            onClick={() => onSelect(current)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#7c5cff] hover:bg-[#6a4be8] text-white text-xs sm:text-sm font-semibold transition-colors"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Explore</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Pagination + autoplay */}
+      <div className="mt-5 flex items-center gap-5">
+        <div className="flex items-center gap-2">
+          {projects.map((p, i) => (
+            <button
+              key={p.id}
+              onClick={() => goTo(i)}
+              aria-label={`Go to ${p.title}`}
+              className="py-2"
+            >
+              <span
+                className={`block h-2 rounded-full transition-all duration-300 ${
+                  i === active
+                    ? "w-7 bg-[#7c5cff] shadow-[0_0_14px_rgba(167,139,250,0.8)]"
+                    : "w-2 bg-white/25 hover:bg-white/60"
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+        <button
+          onClick={() => setIsAutoPlaying((v) => !v)}
+          aria-label={isAutoPlaying ? "Pause auto-rotate" : "Resume auto-rotate"}
+          className="flex items-center gap-1.5 text-xs font-medium text-[#a78bfa] hover:text-white transition-colors"
+        >
+          {isAutoPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+          <span>{isAutoPlaying ? "Auto" : "Paused"}</span>
+        </button>
+        <span className="text-xs text-[#64748b]">
+          <span className="text-white font-bold">{String(active + 1).padStart(2, "0")}</span>
+          {" / "}
+          {String(total).padStart(2, "0")}
+        </span>
       </div>
     </div>
   );

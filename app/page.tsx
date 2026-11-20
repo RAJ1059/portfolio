@@ -14,7 +14,7 @@ import WhatsAppChatbot from "@/components/WhatsAppChatbot";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col selection:bg-[#0281e0]/35 selection:text-white">
+    <div className="min-h-screen bg-[#0a0a0f] text-slate-100 flex flex-col selection:bg-[#7c5cff]/35 selection:text-white">
       {/* Sticky Minimalist Header */}
       <Navbar />
 

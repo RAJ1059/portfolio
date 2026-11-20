@@ -27,9 +27,9 @@ export default function Projects() {
   });
 
   return (
-    <section id="projects" className="py-24 sm:py-28 relative bg-[#080c14] border-t border-white/10 overflow-hidden">
+    <section id="projects" className="py-24 sm:py-28 relative bg-[#0a0a0f] border-t border-white/10 overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#0281e0]/10 blur-[130px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#7c5cff]/10 blur-[130px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header - Sanjay Menon "SELECTED WORK" Aesthetic with High Contrast */}
@@ -41,8 +41,8 @@ export default function Projects() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-14"
         >
           <div className="flex flex-col items-start">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#101726] border border-white/10 text-[#38bdf8] text-xs font-mono uppercase tracking-wider mb-4 shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0281e0]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#14141c] border border-white/10 text-[#a78bfa] text-xs font-mono uppercase tracking-wider mb-4 shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7c5cff]" />
               <span>SELECTED WORK</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white editorial-title">
@@ -56,12 +56,12 @@ export default function Projects() {
           {/* Controls: Category Filter + 3D/Grid Switcher */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             {/* View Mode Switcher */}
-            <div className="flex items-center gap-1 bg-[#101726] p-1.5 rounded-2xl border border-white/10 shadow-lg shadow-black/40">
+            <div className="flex items-center gap-1 bg-[#14141c] p-1.5 rounded-2xl border border-white/10 shadow-lg shadow-black/40">
               <button
                 onClick={() => setViewMode("3d")}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
                   viewMode === "3d"
-                    ? "bg-[#0281e0] text-white shadow-md shadow-[#0281e0]/30"
+                    ? "bg-[#7c5cff] text-white shadow-md shadow-[#7c5cff]/30"
                     : "text-[#94a3b8] hover:text-white hover:bg-white/5"
                 }`}
               >
@@ -72,7 +72,7 @@ export default function Projects() {
                 onClick={() => setViewMode("grid")}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
                   viewMode === "grid"
-                    ? "bg-[#0281e0] text-white shadow-md shadow-[#0281e0]/30"
+                    ? "bg-[#7c5cff] text-white shadow-md shadow-[#7c5cff]/30"
                     : "text-[#94a3b8] hover:text-white hover:bg-white/5"
                 }`}
               >
@@ -82,14 +82,14 @@ export default function Projects() {
             </div>
 
             {/* Filter Pills */}
-            <div className="flex flex-wrap items-center gap-1.5 bg-[#101726] p-1.5 rounded-2xl border border-white/10 shadow-lg shadow-black/40">
+            <div className="flex flex-wrap items-center gap-1.5 bg-[#14141c] p-1.5 rounded-2xl border border-white/10 shadow-lg shadow-black/40">
               {categories.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
                     activeCategory === cat.id
-                      ? "bg-[#0281e0] text-white shadow-md shadow-[#0281e0]/30"
+                      ? "bg-[#7c5cff] text-white shadow-md shadow-[#7c5cff]/30"
                       : "text-[#94a3b8] hover:text-white hover:bg-white/5"
                   }`}
                 >

@@ -16,12 +16,12 @@ import {
 import LiveCodeTerminal from "@/components/LiveCodeTerminal";
 
 const techBadges = [
-  { name: "React", icon: Code2, color: "text-[#38bdf8] border-[#0281e0]/30 bg-[#101726]", delay: 0 },
-  { name: "Node.js", icon: Terminal, color: "text-white border-white/10 bg-[#101726]", delay: 0.1 },
-  { name: "MongoDB", icon: Database, color: "text-[#60a5fa] border-[#0281e0]/30 bg-[#101726]", delay: 0.2 },
-  { name: "WordPress", icon: Globe, color: "text-[#cbd5e1] border-white/10 bg-[#101726]", delay: 0.3 },
-  { name: "TypeScript", icon: Code2, color: "text-[#38bdf8] border-[#0281e0]/30 bg-[#101726]", delay: 0.4 },
-  { name: "Tailwind CSS", icon: Layers, color: "text-[#cbd5e1] border-white/10 bg-[#101726]", delay: 0.5 },
+  { name: "React", icon: Code2, color: "text-[#a78bfa] border-[#7c5cff]/30 bg-[#14141c]", delay: 0 },
+  { name: "Node.js", icon: Terminal, color: "text-white border-white/10 bg-[#14141c]", delay: 0.1 },
+  { name: "MongoDB", icon: Database, color: "text-[#c4b5fd] border-[#7c5cff]/30 bg-[#14141c]", delay: 0.2 },
+  { name: "WordPress", icon: Globe, color: "text-[#cbd5e1] border-white/10 bg-[#14141c]", delay: 0.3 },
+  { name: "TypeScript", icon: Code2, color: "text-[#a78bfa] border-[#7c5cff]/30 bg-[#14141c]", delay: 0.4 },
+  { name: "Tailwind CSS", icon: Layers, color: "text-[#cbd5e1] border-white/10 bg-[#14141c]", delay: 0.5 },
 ];
 
 export default function Hero() {
@@ -35,18 +35,21 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] flex items-center justify-center pt-32 pb-20 lg:pt-36 lg:pb-28 overflow-hidden bg-[#080c14]"
+      className="relative min-h-[92vh] flex items-center justify-center pt-32 pb-20 lg:pt-36 lg:pb-28 overflow-hidden bg-[#0a0a0f]"
     >
       {/* Developer Coding Background Image - Clear & Vividly Visible */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
           src="/code-bg.png"
-          alt="Developer Code Screen Background"
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          decoding="async"
           className="w-full h-full object-cover object-center sm:object-right opacity-65 sm:opacity-75 select-none"
         />
         {/* Vignette Overlay for High Contrast & Text Legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080c14]/60 via-[#080c14]/35 to-[#080c14]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080c14]/85 via-[#080c14]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/60 via-[#0a0a0f]/35 to-[#0a0a0f]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0f]/85 via-[#0a0a0f]/40 to-transparent" />
       </div>
 
       {/* Background ambient lighting */}
@@ -65,25 +68,25 @@ export default function Hero() {
             {/* Friendly Greeting Pill with Clear Visibility */}
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#101726] border border-white/10 shadow-lg shadow-black/40 mb-6"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#14141c] border border-white/10 shadow-lg shadow-black/40 mb-6"
             >
               <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0281e0] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#0281e0]" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7c5cff] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#7c5cff]" />
               </span>
               <span className="text-xs font-semibold text-white tracking-wide">
                 👋 Hey, I&apos;m Shivraj
               </span>
               <span className="text-xs text-[#64748b]">|</span>
-              <span className="text-xs font-medium text-[#38bdf8]">
+              <span className="text-xs font-medium text-[#a78bfa]">
                 Full-Stack &amp; WordPress Dev
               </span>
             </motion.div>
 
             {/* Giant Editorial Display Headline */}
-            <h1 className="text-5xl sm:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-white editorial-title mb-6 lowercase">
+            <h1 className="text-[2.6rem] leading-none sm:text-7xl lg:text-[5rem] font-extrabold tracking-tight text-white editorial-title mb-6 lowercase">
               full-stack <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#38bdf8]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#a78bfa]">
                 developer
               </span>
             </h1>
@@ -94,16 +97,16 @@ export default function Hero() {
             </p>
 
             {/* Metadata Badges Strip with High-Contrast Boxes */}
-            <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#cbd5e1] mb-9">
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#101726] border border-white/10 shadow-sm">
-                <MapPin className="w-4 h-4 text-[#0281e0]" />
+            <div className="flex flex-wrap items-center gap-3 text-[11px] sm:text-xs font-medium tracking-wide text-[#cbd5e1] mb-9">
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#14141c] border border-white/10 shadow-sm">
+                <MapPin className="w-4 h-4 text-[#7c5cff]" />
                 <span>BASED IN: INDORE, INDIA</span>
               </div>
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#101726] border border-white/10 shadow-sm">
-                <Briefcase className="w-4 h-4 text-[#0281e0]" />
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#14141c] border border-white/10 shadow-sm">
+                <Briefcase className="w-4 h-4 text-[#7c5cff]" />
                 <span>EMBTEL WEB SOLUTIONS</span>
               </div>
-              <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#101726] border border-[#0281e0]/30 text-[#38bdf8] font-semibold">
+              <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#14141c] border border-[#7c5cff]/30 text-[#a78bfa] font-semibold">
                 <span>CREATE &gt; CONSUME</span>
               </div>
             </div>
@@ -114,7 +117,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => scrollTo("projects")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-[#0281e0] hover:bg-[#0275cc] text-white font-bold text-sm shadow-xl shadow-[#0281e0]/30 transition-all cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-[#7c5cff] hover:bg-[#6a4be8] text-white font-bold text-sm shadow-xl shadow-[#7c5cff]/30 transition-all cursor-pointer"
               >
                 <span>Check Out My Work</span>
                 <ArrowRight className="w-4 h-4" />
@@ -124,10 +127,10 @@ export default function Hero() {
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => scrollTo("contact")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-[#101726] hover:bg-[#151e33] text-white font-bold text-sm border border-white/10 hover:border-[#0281e0]/50 transition-all shadow-lg cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-[#14141c] hover:bg-[#1b1b27] text-white font-bold text-sm border border-white/10 hover:border-[#7c5cff]/50 transition-all shadow-lg cursor-pointer"
               >
                 <span>Get in Touch</span>
-                <Sparkles className="w-4 h-4 text-[#38bdf8]" />
+                <Sparkles className="w-4 h-4 text-[#a78bfa]" />
               </motion.button>
             </div>
 
@@ -135,7 +138,7 @@ export default function Hero() {
             <div className="pt-6 border-t border-white/10 w-full grid grid-cols-2 sm:grid-cols-3 gap-4">
               <motion.div
                 whileHover={{ y: -2 }}
-                className="p-4 rounded-2xl bg-[#101726] border border-white/10 shadow-md"
+                className="p-4 rounded-2xl bg-[#14141c] border border-white/10 shadow-md"
               >
                 <span className="text-2xl sm:text-3xl font-extrabold text-white font-mono block">
                   2+
@@ -146,7 +149,7 @@ export default function Hero() {
               </motion.div>
               <motion.div
                 whileHover={{ y: -2 }}
-                className="p-4 rounded-2xl bg-[#101726] border border-white/10 shadow-md"
+                className="p-4 rounded-2xl bg-[#14141c] border border-white/10 shadow-md"
               >
                 <span className="text-2xl sm:text-3xl font-extrabold text-white font-mono block">
                   10+
@@ -157,7 +160,7 @@ export default function Hero() {
               </motion.div>
               <motion.div
                 whileHover={{ y: -2 }}
-                className="col-span-2 sm:col-span-1 p-4 rounded-2xl bg-[#101726] border border-white/10 shadow-md"
+                className="col-span-2 sm:col-span-1 p-4 rounded-2xl bg-[#14141c] border border-white/10 shadow-md"
               >
                 <span className="text-2xl sm:text-3xl font-extrabold text-white font-mono block">
                   100%

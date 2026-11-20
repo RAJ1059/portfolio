@@ -39,9 +39,20 @@ export default function Navbar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu on Escape and lock body scroll while open
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mobileMenuOpen]);
 
   const scrollTo = (id: string) => {
     setMobileMenuOpen(false);
@@ -54,9 +65,9 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-[#000000]/85 backdrop-blur-xl border-b border-[#1a1a1a] py-3.5"
-          : "bg-transparent py-5"
+        isScrolled || mobileMenuOpen
+          ? "bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-white/10 py-3"
+          : "bg-transparent py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,11 +78,11 @@ export default function Navbar() {
             className="flex items-center gap-2.5 text-left group cursor-pointer focus:outline-none"
             aria-label="Back to top"
           >
-            <span className="w-8 h-8 rounded-lg bg-[#111111] border border-[#242424] font-mono text-xs font-bold text-[#0281e0] flex items-center justify-center group-hover:border-[#0281e0] transition-colors">
+            <span className="w-8 h-8 rounded-lg bg-[#111111] border border-[#242424] font-mono text-xs font-bold text-[#7c5cff] flex items-center justify-center group-hover:border-[#7c5cff] transition-colors">
               {personalInfo.initials}
             </span>
             <div className="flex flex-col">
-              <span className="text-sm font-semibold tracking-tight text-white group-hover:text-[#0281e0] transition-colors">
+              <span className="text-sm font-semibold tracking-tight text-white group-hover:text-[#7c5cff] transition-colors">
                 {personalInfo.name}
               </span>
               <span className="text-[10px] font-mono text-[#737373]">
@@ -125,9 +136,9 @@ export default function Navbar() {
             <a
               href="/Shivraj_Singh_Resume.pdf"
               download="Shivraj_Singh_Resume.pdf"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0f0f0f] border border-[#222222] hover:border-[#0281e0]/60 text-xs font-medium text-white transition-all shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0f0f0f] border border-[#222222] hover:border-[#7c5cff]/60 text-xs font-medium text-white transition-all shadow-sm"
             >
-              <FileText className="w-3.5 h-3.5 text-[#0281e0]" />
+              <FileText className="w-3.5 h-3.5 text-[#7c5cff]" />
               <span>Resume</span>
             </a>
 
@@ -135,7 +146,7 @@ export default function Navbar() {
               href={personalInfo.meetingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#0281e0] to-[#2563eb] hover:from-[#38bdf8] hover:to-[#0281e0] text-xs font-semibold text-white transition-all shadow-md shadow-[#0281e0]/30 hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#7c5cff] to-[#5b3df5] hover:from-[#a78bfa] hover:to-[#7c5cff] text-xs font-semibold text-white transition-all shadow-md shadow-[#7c5cff]/30 hover:scale-[1.02] active:scale-[0.98]"
             >
               <Calendar className="w-3.5 h-3.5" />
               <span>Book Meeting</span>
@@ -143,7 +154,7 @@ export default function Navbar() {
 
             <button
               onClick={() => scrollTo("contact")}
-              className="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-[#141d2e] hover:bg-[#1a263c] border border-white/10 text-xs font-semibold text-white transition-all cursor-pointer"
+              className="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-[#1b1b27] hover:bg-[#222233] border border-white/10 text-xs font-semibold text-white transition-all cursor-pointer"
             >
               <span>Let&apos;s Talk</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -156,15 +167,17 @@ export default function Navbar() {
               href={personalInfo.meetingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#0281e0] text-xs font-semibold text-white shadow-sm"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#7c5cff] text-xs font-semibold text-white shadow-sm"
             >
               <Calendar className="w-3 h-3" />
               <span>Book</span>
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-[#111111] border border-[#222222] text-[#a3a3a3] hover:text-white transition-colors"
+              className="p-2.5 rounded-lg bg-[#14141c] border border-white/10 text-[#cbd5e1] hover:text-white transition-colors"
               aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -174,14 +187,17 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0a0a0a] border-b border-[#1a1a1a] px-4 pt-3 pb-6 space-y-2 mt-2">
+        <div
+          id="mobile-menu"
+          className="md:hidden max-h-[calc(100vh-4.5rem)] overflow-y-auto px-4 pt-3 pb-6 space-y-1 mt-3 border-t border-white/10"
+        >
           {navLinks.map((link) => {
             const targetId = link.href.replace("#", "");
             return (
               <button
                 key={link.name}
                 onClick={() => scrollTo(targetId)}
-                className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-[#a3a3a3] hover:text-white hover:bg-white/5"
+                className="w-full text-left px-3 py-3 rounded-lg text-sm font-medium text-[#cbd5e1] hover:text-white hover:bg-white/5"
               >
                 {link.name}
               </button>
@@ -193,7 +209,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#0281e0] text-white text-xs font-bold uppercase tracking-wider shadow-md shadow-[#0281e0]/30"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#7c5cff] text-white text-xs font-bold uppercase tracking-wider shadow-md shadow-[#7c5cff]/30"
             >
               <Calendar className="w-4 h-4" />
               <span>Book A 1-on-1 Meeting</span>
@@ -204,7 +220,7 @@ export default function Navbar() {
             <a
               href="/Shivraj_Singh_Resume.pdf"
               download
-              className="inline-flex items-center gap-2 text-xs font-medium text-[#0281e0]"
+              className="inline-flex items-center gap-2 text-xs font-medium text-[#7c5cff]"
             >
               <FileText className="w-4 h-4" /> Download Resume
             </a>

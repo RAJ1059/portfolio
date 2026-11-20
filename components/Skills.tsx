@@ -24,7 +24,7 @@ const categoryIcons: Record<string, React.ElementType> = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-28 relative bg-[#080c14] border-t border-white/10">
+    <section id="skills" className="py-28 relative bg-[#0a0a0f] border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -34,8 +34,8 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
           className="flex flex-col items-start mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#101726] border border-white/10 text-[#38bdf8] text-xs font-mono uppercase tracking-wider mb-4 shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#0281e0]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#14141c] border border-white/10 text-[#a78bfa] text-xs font-mono uppercase tracking-wider mb-4 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#7c5cff]" />
             <span>WHAT I BUILD WITH</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white editorial-title">
@@ -58,12 +58,12 @@ export default function Skills() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: idx * 0.07 }}
                 whileHover={{ y: -6, scale: 1.01 }}
-                className="bg-[#101726] hover:bg-[#141d30] rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10 hover:border-[#0281e0]/60 shadow-xl shadow-black/50 hover:shadow-2xl hover:shadow-[#0281e0]/15 transition-all duration-300 relative overflow-hidden"
+                className="bg-[#14141c] hover:bg-[#1b1b27] rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10 hover:border-[#7c5cff]/60 shadow-xl shadow-black/50 hover:shadow-2xl hover:shadow-[#7c5cff]/15 transition-all duration-300 relative overflow-hidden"
               >
                 <div>
                   {/* Category Header */}
                   <div className="flex items-center gap-3.5 mb-4">
-                    <div className="p-3 rounded-2xl bg-[#090e1a] border border-white/10 text-[#0281e0] shadow-sm">
+                    <div className="p-3 rounded-2xl bg-[#0d0d14] border border-white/10 text-[#7c5cff] shadow-sm">
                       <IconComponent className="w-5 h-5" />
                     </div>
                     <div>
@@ -85,14 +85,14 @@ export default function Skills() {
                         whileHover={{ scale: 1.05 }}
                         className={`group flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all duration-200 ${
                           skill.highlight
-                            ? "bg-[#090e1a] border-white/15 text-white shadow-sm hover:border-[#0281e0]"
+                            ? "bg-[#0d0d14] border-white/15 text-white shadow-sm hover:border-[#7c5cff]"
                             : "bg-[#080c16] border-white/5 text-[#cbd5e1] hover:border-white/20 hover:text-white"
                         }`}
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#0281e0] shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#7c5cff] shrink-0" />
                         <span>{skill.name}</span>
                         {skill.levelBadge && (
-                          <span className="text-[10px] font-mono text-[#94a3b8] ml-1 group-hover:text-[#38bdf8]">
+                          <span className="text-[10px] font-mono text-[#94a3b8] ml-1 group-hover:text-[#a78bfa]">
                             ({skill.levelBadge})
                           </span>
                         )}
@@ -104,8 +104,8 @@ export default function Skills() {
                 {/* Footer status indicator */}
                 <div className="pt-5 border-t border-white/10 flex items-center justify-between text-xs font-mono text-[#94a3b8]">
                   <span>{category.skills.length} proficiencies</span>
-                  <span className="text-[#38bdf8] font-semibold flex items-center gap-1">
-                    <Check className="w-3.5 h-3.5 text-[#0281e0]" /> Verified Experience
+                  <span className="text-[#a78bfa] font-semibold flex items-center gap-1">
+                    <Check className="w-3.5 h-3.5 text-[#7c5cff]" /> Verified Experience
                   </span>
                 </div>
               </motion.div>
